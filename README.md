@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Delacruz Barber - BarberProject
 
 Sistema completo de agendamento online e gerenciamento interno para a **Delacruz Barber**. Desenvolvido com Python, Django e Bootstrap 5 para atender aos requisitos acadêmicos do 1º e 2º trimestres.
@@ -87,3 +88,7 @@ Sistema completo de agendamento online e gerenciamento interno para a **Delacruz
 - **Barbeiro Heitor Pontes**:
   - Usuário: `heitor`
   - Senha: `123456`
+=======
+# pw2026
+sim.
+>>>>>>> 98d4a58a6fde5f5e82afdb31fd156a36dc2040b9
