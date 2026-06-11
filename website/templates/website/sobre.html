@@ -1,0 +1,73 @@
+{% extends "website/modelo.html" %}
+{% load static %}
+
+{% block titulo_pagina %}Sobre Nós - Delacruz Barber{% endblock %}
+
+{% block conteudo %}
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold mb-2"><span class="text-gradient">Sobre o Projeto</span></h1>
+            <p class="text-secondary">Delacruz Barber - Sistema de Agendamento Online</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <!-- Textual Description -->
+            <div class="col-lg-8">
+                <div class="card glass-card p-4 mb-4">
+                    <h2 class="h3 text-success mb-3">O Sistema</h2>
+                    <p>
+                        Este é o sistema oficial de agendamento e gerenciamento da barbearia <strong>Delacruz Barber</strong>, desenvolvido em Python utilizando o framework web <strong>Django</strong> para fins acadêmicos.
+                    </p>
+                    <p>
+                        O sistema foi projetado para aproximar o cliente do barbeiro e facilitar a gestão do negócio:
+                    </p>
+                    <ul class="text-secondary">
+                        <li class="mb-2"><strong>Clientes</strong> podem visualizar a cartela de serviços e a lista de barbeiros em tempo real, efetuar cadastro individual e agendar horários de forma totalmente digital e automatizada.</li>
+                        <li class="mb-2"><strong>Barbeiros</strong> têm acesso a uma área administrativa privada para acompanhar seus próprios compromissos do dia, fechar faturamentos, monitorar avaliações de clientes e divulgar fotos de seus cortes recentes.</li>
+                        <li class="mb-2"><strong>Administradores/Staff</strong> têm total controle operacional por meio do painel geral de relatórios e faturamentos, gerenciando os horários disponíveis, a lista de serviços, a equipe de profissionais e as mensagens recebidas.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Diagrams Section -->
+            <div class="col-lg-8">
+                <div class="card glass-card p-4">
+                    <h2 class="h3 text-white mb-4"><i class="bi bi-map"></i> Diagramas de Projeto</h2>
+                    
+                    <div class="row g-4">
+                        <!-- Use Case Diagram -->
+                        <div class="col-md-6 text-center">
+                            <div class="p-3 bg-dark rounded border border-secondary h-100 d-flex flex-column justify-content-between">
+                                <h5 class="text-white mb-3">Diagrama de Caso de Uso</h5>
+                                <div class="mb-3 flex-grow-1 d-flex align-items-center justify-content-center">
+                                    <img src="{% static 'website/img/diagrama-caso-uso.png' %}" class="img-fluid rounded border border-secondary" alt="Diagrama de Caso de Uso" onerror="this.style.display='none'; document.getElementById('use-case-placeholder').style.display='block';">
+                                    <div id="use-case-placeholder" class="p-4 w-100 text-center text-muted" style="display:none; border: 1.5px dashed rgba(255, 255, 255, 0.15);">
+                                        <i class="bi bi-diagram-2 fs-2 d-block mb-2 text-secondary"></i>
+                                        <span class="small">Insira aqui a imagem do diagrama de caso de uso.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Class Diagram -->
+                        <div class="col-md-6 text-center">
+                            <div class="p-3 bg-dark rounded border border-secondary h-100 d-flex flex-column justify-content-between">
+                                <h5 class="text-white mb-3">Diagrama de Classes</h5>
+                                <div class="mb-3 flex-grow-1 d-flex align-items-center justify-content-center">
+                                    <img src="{% static 'website/img/diagrama-classes.png' %}" class="img-fluid rounded border border-secondary" alt="Diagrama de Classes" onerror="this.style.display='none'; document.getElementById('class-placeholder').style.display='block';">
+                                    <div id="class-placeholder" class="p-4 w-100 text-center text-muted" style="display:none; border: 1.5px dashed rgba(255, 255, 255, 0.15);">
+                                        <i class="bi bi-diagram-3 fs-2 d-block mb-2 text-secondary"></i>
+                                        <span class="small">Insira aqui a imagem do diagrama de classes.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends "website/modelo.html" %}
+{% load crispy_forms_tags %}
+
+{% block titulo_pagina %}Agendar Horário - Delacruz Barber{% endblock %}
+
+{% block conteudo %}
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold mb-2"><span class="text-gradient">Agendamento Online</span></h1>
+            <p class="text-secondary">Escolha o serviço, barbeiro, data e horário ideais para você</p>
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="row g-4">
+                <!-- STEP 1 & 2: Service, Barber, Date, and Time Selection -->
+                <div class="col-lg-8">
+                    <div class="card glass-card p-4 mb-4">
+                        <h3 class="h4 text-success mb-4"><i class="bi bi-calendar-check"></i> 1. Escolha os Detalhes</h3>
+                        
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="id_servico" class="form-label">Selecione o Serviço</label>
+                                {{ form.servico }}
+                                {% if form.servico.errors %}
+                                    <div class="text-danger small mt-1">{{ form.servico.errors }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="id_barbeiro" class="form-label">Selecione o Barbeiro</label>
+                                {{ form.barbeiro }}
+                                {% if form.barbeiro.errors %}
+                                    <div class="text-danger small mt-1">{{ form.barbeiro.errors }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <label for="id_data" class="form-label">Selecione a Data</label>
+                                {{ form.data }}
+                                {% if form.data.errors %}
+                                    <div class="text-danger small mt-1">{{ form.data.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Time Selection Grid -->
+                        <div class="mt-4">
+                            <label class="form-label d-block">2. Escolha o Horário Disponível</label>
+                            {{ form.horario }} <!-- Hidden field populated by main.js -->
+                            
+                            {% if form.horario.errors %}
+                                <div class="alert alert-danger small py-2 my-2">{{ form.horario.errors }}</div>
+                            {% endif %}
+                            
+                            <div id="time-grid-container" class="p-3 bg-dark rounded border border-secondary">
+                                <div class="text-center text-muted py-3">
+                                    <i class="bi bi-info-circle fs-4 d-block mb-2"></i>
+                                    Selecione um barbeiro e uma data para ver os horários.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: Customer Information -->
+                    <div class="card glass-card p-4">
+                        <h3 class="h4 text-white mb-4"><i class="bi bi-person-badge"></i> 3. Seus Dados de Contato</h3>
+                        
+                        {% if not request.user.is_authenticated %}
+                            <div class="alert alert-delacruz small py-2 mb-3">
+                                <i class="bi bi-lightbulb-fill me-1"></i>
+                                Dica: Faça <a href="{% url 'login' %}" class="alert-link text-white text-decoration-underline">Login</a> ou crie uma <a href="{% url 'cadastro' %}" class="alert-link text-white text-decoration-underline">Conta</a> para salvar seus dados e acompanhar o histórico de cortes.
+                            </div>
+                        {% endif %}
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="id_nome" class="form-label">Nome Completo</label>
+                                {{ form.nome }}
+                                {% if form.nome.errors %}
+                                    <div class="text-danger small mt-1">{{ form.nome.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="id_telefone" class="form-label">Telefone / WhatsApp</label>
+                                {{ form.telefone }}
+                                {% if form.telefone.errors %}
+                                    <div class="text-danger small mt-1">{{ form.telefone.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="id_email" class="form-label">E-mail para Confirmação</label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                    <div class="text-danger small mt-1">{{ form.email.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="id_observacoes" class="form-label">Observações Adicionais (opcional)</label>
+                                {{ form.observacoes }}
+                                {% if form.observacoes.errors %}
+                                    <div class="text-danger small mt-1">{{ form.observacoes.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIDEBAR: Summary and Submit -->
+                <div class="col-lg-4">
+                    <div class="card glass-card p-4 sticky-top" style="top: 100px; z-index: 10;">
+                        <h3 class="h4 text-white mb-4"><i class="bi bi-receipt"></i> Resumo do Agendamento</h3>
+                        
+                        <div id="booking-summary" class="p-3 bg-dark rounded border border-secondary mb-4">
+                            <p class="text-muted text-center mb-0">
+                                Preencha as informações para ver o resumo aqui.
+                            </p>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-delacruz w-100 py-3 fs-5">
+                            Confirmar Agendamento <i class="bi bi-check2-circle"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+</section>
+{% endblock %}

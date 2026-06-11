@@ -1,15 +1,55 @@
-{% load static %}
+{% extends "website/modelo.html" %}
+{% load crispy_forms_tags %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="es.css">
-</head>
-<body>
-    <p>ola ourld</p>
-    
-</body>
-</html>
+{% block titulo_pagina %}Contato - Delacruz Barber{% endblock %}
+
+{% block conteudo %}
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold mb-2"><span class="text-gradient">Fale Conosco</span></h1>
+            <p class="text-secondary">Dúvidas, elogios ou sugestões? Envie uma mensagem!</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-5">
+                <div class="card glass-card p-4 h-100">
+                    <h3 class="h4 text-success mb-4"><i class="bi bi-info-circle"></i> Informações</h3>
+                    <ul class="list-unstyled text-secondary lh-lg mb-4">
+                        <li class="mb-3">
+                            <i class="bi bi-geo-alt text-success me-2"></i>
+                            Av. Paraná, 1234 - Maringá - PR
+                        </li>
+                        <li class="mb-3">
+                            <i class="bi bi-telephone text-success me-2"></i>
+                            (44) 9919-0997
+                        </li>
+                        <li class="mb-3">
+                            <i class="bi bi-envelope text-success me-2"></i>
+                            contato@delacruzbarber.com.br
+                        </li>
+                    </ul>
+                    <h3 class="h4 text-white mb-3"><i class="bi bi-clock"></i> Horário de Atendimento</h3>
+                    <p class="text-secondary small mb-0">
+                        Segunda a Sábado: 08:00 às 21:00<br>
+                        Domingos e Feriados: Fechado
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <div class="card glass-card p-4">
+                    <h3 class="h4 text-white mb-4"><i class="bi bi-envelope-paper"></i> Enviar Mensagem</h3>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-delacruz w-100 py-3">Enviar Mensagem</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

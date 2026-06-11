@@ -1,0 +1,64 @@
+{% extends "website/modelo.html" %}
+
+{% block titulo_pagina %}Mensagens de Contato - Delacruz Barber{% endblock %}
+
+{% block conteudo %}
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <div>
+                <h1 class="display-5 fw-bold mb-1"><span class="text-gradient">Mensagens de Contato</span></h1>
+                <p class="text-secondary mb-0">Gerencie as mensagens e contatos enviados pelo site público</p>
+            </div>
+        </div>
+
+        <div class="card glass-card p-4">
+            <div class="table-responsive">
+                <table class="table table-hover table-glass w-100">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Telefone</th>
+                            <th>Enviada em</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for m in mensagens %}
+                            <tr class="{% if not m.lida %}fw-bold{% endif %}">
+                                <td>{{ m.nome }}</td>
+                                <td>{{ m.email }}</td>
+                                <td>{{ m.telefone }}</td>
+                                <td>{{ m.enviada_em|date:"d/m/Y H:i" }}</td>
+                                <td>
+                                    {% if m.lida %}
+                                        <span class="badge bg-secondary">Lida</span>
+                                    {% else %}
+                                        <span class="badge bg-warning text-dark">Nova</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <a href="{% url 'ver_mensagem' m.id %}" class="btn btn-sm btn-delacruz py-1 px-2" title="Ler">
+                                            Ler <i class="bi bi-envelope-open"></i>
+                                        </a>
+                                        <a href="{% url 'excluir_mensagem' m.id %}" class="btn btn-sm btn-delacruz-outline py-1 px-2 text-danger" title="Excluir">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="6" class="text-center text-muted py-4">Nenhuma mensagem enviada.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

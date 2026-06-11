@@ -1,0 +1,72 @@
+{% extends "website/modelo.html" %}
+
+{% block titulo_pagina %}Gerenciar Barbeiros - Delacruz Barber{% endblock %}
+
+{% block conteudo %}
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-5 gap-3">
+            <div>
+                <h1 class="display-5 fw-bold mb-1"><span class="text-gradient">Gerenciar Barbeiros</span></h1>
+                <p class="text-secondary mb-0">Administre a equipe de profissionais da barbearia</p>
+            </div>
+            <div>
+                <a href="{% url 'cadastrar_barbeiro' %}" class="btn btn-delacruz">
+                    <i class="bi bi-plus-circle me-1"></i> Novo Barbeiro
+                </a>
+            </div>
+        </div>
+
+        <div class="card glass-card p-4">
+            <div class="table-responsive">
+                <table class="table table-hover table-glass w-100">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Cargo</th>
+                            <th>Especialidade</th>
+                            <th>Ativo</th>
+                            <th>Usuário Associado</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for b in barbeiros %}
+                            <tr>
+                                <td class="fw-bold">{{ b.nome }}</td>
+                                <td><span class="badge badge-delacruz">{{ b.cargo }}</span></td>
+                                <td class="text-secondary small">{{ b.especialidade }}</td>
+                                <td>
+                                    {% if b.ativo %}
+                                        <span class="badge bg-success">Sim</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Não</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ b.usuario.username|default:"-" }}</td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <a href="{% url 'ver_barbeiro' b.id %}" class="btn btn-sm btn-delacruz-outline py-1 px-2" title="Visualizar">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        <a href="{% url 'editar_barbeiro' b.id %}" class="btn btn-sm btn-delacruz-outline py-1 px-2 text-success" title="Editar">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <a href="{% url 'excluir_barbeiro' b.id %}" class="btn btn-sm btn-delacruz-outline py-1 px-2 text-danger" title="Excluir">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="6" class="text-center text-muted py-4">Nenhum barbeiro cadastrado.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

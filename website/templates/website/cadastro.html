@@ -1,0 +1,35 @@
+{% extends "website/modelo.html" %}
+{% load crispy_forms_tags %}
+
+{% block titulo_pagina %}Cadastre-se - Delacruz Barber{% endblock %}
+
+{% block conteudo %}
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card glass-card p-4">
+                    <div class="text-center mb-4">
+                        <h1 class="h2 text-white">Criar Conta</h1>
+                        <p class="text-secondary small">Cadastre-se para agendar e gerenciar seus cortes na Delacruz Barber</p>
+                    </div>
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-delacruz w-100 py-3">Criar Minha Conta</button>
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-4 border-top border-secondary pt-3">
+                        <span class="text-secondary small">Já possui uma conta?</span>
+                        <a href="{% url 'login' %}" class="text-success small fw-bold ms-1 text-decoration-none">Faça Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

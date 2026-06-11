@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --bg-dark: #090d16;
+    --bg-card: rgba(17, 24, 39, 0.7);
+    --bg-card-border: rgba(255, 255, 255, 0.08);
+    --accent-green: #22c55e;
+    --accent-green-hover: #16a34a;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+body {
+    background-color: var(--bg-dark);
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(34, 197, 94, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(15, 23, 42, 0.8) 0px, transparent 50%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Base layout & typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #ffffff 30%, var(--accent-green) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Glassmorphism containers */
+.glass-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--bg-card-border);
+    border-radius: 16px;
+    box-shadow: var(--glass-shadow);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.glass-card:hover {
+    border-color: rgba(34, 197, 94, 0.25);
+}
+
+/* Custom buttons */
+.btn-delacruz {
+    background: var(--accent-green);
+    border: 1px solid var(--accent-green);
+    color: #000000;
+    border-radius: 10px;
+    padding: 10px 24px;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 14px rgba(34, 197, 94, 0.3);
+}
+
+.btn-delacruz:hover {
+    background: var(--accent-green-hover);
+    border-color: var(--accent-green-hover);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34, 197, 94, 0.5);
+}
+
+.btn-delacruz-outline {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+    border-radius: 10px;
+    padding: 10px 24px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-delacruz-outline:hover {
+    border-color: var(--accent-green);
+    color: var(--accent-green);
+    background: rgba(34, 197, 94, 0.08);
+    transform: translateY(-2px);
+}
+
+.auth-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+/* Navbar customization */
+.navbar-delacruz {
+    background: rgba(9, 13, 22, 0.85) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.navbar-brand {
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--text-primary) !important;
+}
+
+.nav-link {
+    color: var(--text-secondary) !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--accent-green) !important;
+}
+
+/* Footer style */
+footer {
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: #06090f;
+    padding: 24px 0;
+}
+
+/* Badges */
+.badge-delacruz {
+    background: rgba(34, 197, 94, 0.15);
+    color: var(--accent-green);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Form Styles */
+.form-control, .form-select {
+    background-color: rgba(15, 23, 42, 0.6) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-primary) !important;
+    border-radius: 10px !important;
+    padding: 12px 16px !important;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--accent-green) !important;
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15) !important;
+    outline: none !important;
+}
+
+label {
+    color: var(--text-primary);
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 100px 0 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(34, 197, 94, 0.05) 0%, transparent 70%);
+    z-index: -1;
+}
+
+/* Time slots booking grid */
+.time-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.time-slot-btn {
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    background: rgba(30, 41, 59, 0.4);
+    color: var(--text-primary);
+    padding: 12px 6px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    cursor: pointer;
+}
+
+.time-slot-btn:hover:not(:disabled) {
+    border-color: var(--accent-green);
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--accent-green);
+}
+
+.time-slot-btn.selected {
+    background: var(--accent-green) !important;
+    border-color: var(--accent-green) !important;
+    color: #000000 !important;
+    font-weight: 700;
+    box-shadow: 0 0 12px rgba(34, 197, 94, 0.4);
+}
+
+.time-slot-btn:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+    background: rgba(15, 23, 42, 0.2);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Table styling for glassmorphism */
+.table-glass {
+    color: var(--text-primary);
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+.table-glass th {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+    font-weight: 600;
+    padding: 12px;
+}
+
+.table-glass td {
+    background: rgba(30, 41, 59, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-style: solid none;
+    padding: 16px 12px;
+    vertical-align: middle;
+}
+
+.table-glass td:first-child {
+    border-left: 1px solid rgba(255, 255, 255, 0.03);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.table-glass td:last-child {
+    border-right: 1px solid rgba(255, 255, 255, 0.03);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.table-glass tr:hover td {
+    background: rgba(30, 41, 59, 0.5);
+    border-color: rgba(34, 197, 94, 0.15);
+}
+
+/* Alert adjustments */
+.alert-delacruz {
+    background: rgba(34, 197, 94, 0.1) !important;
+    color: var(--accent-green) !important;
+    border: 1px solid rgba(34, 197, 94, 0.2) !important;
+    border-radius: 10px;
+}
+
+/* Sidebar Dashboard Navigation */
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.sidebar-link:hover, .sidebar-link.active {
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--accent-green);
+}

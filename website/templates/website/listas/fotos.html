@@ -1,0 +1,56 @@
+{% extends "website/modelo.html" %}
+
+{% block titulo_pagina %}Gerenciar Fotos de Trabalho - Delacruz Barber{% endblock %}
+
+{% block conteudo %}
+<section class="py-5">
+    <div class="container">
+        <h1 class="display-5 fw-bold mb-5"><span class="text-gradient">Gerenciar Fotos</span></h1>
+
+        <div class="card glass-card p-4">
+            <div class="table-responsive">
+                <table class="table table-hover table-glass w-100">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Barbeiro</th>
+                            <th>Categoria</th>
+                            <th>Publicado</th>
+                            <th>Criado em</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for f in fotos %}
+                            <tr>
+                                <td class="fw-bold">{{ f.titulo }}</td>
+                                <td>{{ f.barbeiro.nome }}</td>
+                                <td>{{ f.get_categoria_display }}</td>
+                                <td>
+                                    {% if f.publicado %}
+                                        <span class="badge bg-success">Sim</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Não</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ f.criado_em|date:"d/m/Y H:i" }}</td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <a href="{% url 'ver_foto' f.id %}" class="btn btn-sm btn-delacruz-outline py-1 px-2" title="Visualizar">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="6" class="text-center text-muted py-4">Nenhuma foto enviada.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends "website/modelo.html" %}
+
+{% block titulo_pagina %}Relatórios Financeiros - Delacruz Barber{% endblock %}
+
+{% block conteudo %}
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <div>
+                <h1 class="display-5 fw-bold mb-1"><span class="text-gradient">Relatórios Operacionais</span></h1>
+                <p class="text-secondary mb-0">Estatísticas de desempenho e faturamento profissional</p>
+            </div>
+            <a href="{% url 'area_barbeiro' %}" class="btn btn-delacruz-outline btn-sm">
+                <i class="bi bi-arrow-left"></i> Voltar ao Painel
+            </a>
+        </div>
+
+        <!-- Metric Cards Row -->
+        <div class="row g-4 mb-5">
+            <div class="col-sm-6 col-lg-3">
+                <div class="card glass-card p-4 text-center">
+                    <div class="fs-1 text-success mb-2"><i class="bi bi-cash-coin"></i></div>
+                    <span class="text-secondary small d-block mb-1">Ganhos Hoje</span>
+                    <strong class="fs-2 text-success">R$ {{ faturamento_hoje }}</strong>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-3">
+                <div class="card glass-card p-4 text-center">
+                    <div class="fs-1 text-success mb-2"><i class="bi bi-wallet2"></i></div>
+                    <span class="text-secondary small d-block mb-1">Ganhos (30 Dias)</span>
+                    <strong class="fs-2 text-white">R$ {{ faturamento_30_dias }}</strong>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-3">
+                <div class="card glass-card p-4 text-center">
+                    <div class="fs-1 text-info mb-2"><i class="bi bi-calendar-check-fill"></i></div>
+                    <span class="text-secondary small d-block mb-1">Atendidos Hoje</span>
+                    <strong class="fs-2 text-white">{{ agendamentos_hoje_count }}</strong>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-3">
+                <div class="card glass-card p-4 text-center">
+                    <div class="fs-1 text-warning mb-2"><i class="bi bi-star-fill"></i></div>
+                    <span class="text-secondary small d-block mb-1">Média de Avaliações</span>
+                    <strong class="fs-2 text-warning">{{ media_nota }}/5.0</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- Popular services -->
+            <div class="col-md-6">
+                <div class="card glass-card p-4 h-100">
+                    <h3 class="h5 text-white mb-4"><i class="bi bi-bar-chart-line text-success"></i> Serviços Mais Realizados</h3>
+                    
+                    <ul class="list-unstyled mb-0">
+                        {% for item in servicos_populares %}
+                            <li class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="text-white small fw-bold">{{ item.servico__nome }}</span>
+                                    <span class="badge badge-delacruz">{{ item.total }} cortes</span>
+                                </div>
+                                <div class="progress" style="height: 6px; background-color: rgba(255,255,255,0.05);">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: {% widthratio item.total agendamentos_30_dias_count 100 %}%"></div>
+                                </div>
+                            </li>
+                        {% empty %}
+                            <li class="text-muted text-center py-4">Nenhum serviço realizado ainda.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <!-- General Statistics Summary -->
+            <div class="col-md-6">
+                <div class="card glass-card p-4 h-100">
+                    <h3 class="h5 text-white mb-4"><i class="bi bi-info-circle text-info"></i> Resumo de Atividade</h3>
+                    
+                    <div class="lh-lg text-secondary">
+                        <div class="d-flex justify-content-between border-bottom border-secondary py-2">
+                            <span>Clientes Distintos Atendidos:</span>
+                            <strong class="text-white">{{ clientes_atendidos }}</strong>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom border-secondary py-2">
+                            <span>Total de Serviços Finalizados (30 Dias):</span>
+                            <strong class="text-white">{{ agendamentos_30_dias_count }}</strong>
+                        </div>
+                        <div class="d-flex justify-content-between py-2">
+                            <span>Meta Mensal de Faturamento:</span>
+                            <strong class="text-success">R$ 5.000,00</strong>
+                        </div>
+                        <div class="progress mt-3" style="height: 12px; background-color: rgba(255,255,255,0.05);">
+                            <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: {% widthratio faturamento_30_dias 5000 100 %}%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

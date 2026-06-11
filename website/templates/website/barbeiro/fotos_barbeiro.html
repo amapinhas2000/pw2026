@@ -1,0 +1,67 @@
+{% extends "website/modelo.html" %}
+
+{% block titulo_pagina %}Minhas Fotos - Delacruz Barber{% endblock %}
+
+{% block conteudo %}
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-5 gap-3">
+            <div>
+                <h1 class="display-5 fw-bold mb-1"><span class="text-gradient">Minhas Fotos</span></h1>
+                <p class="text-secondary mb-0">Gerencie a galeria de cortes e estilos cadastrados por você</p>
+            </div>
+            <div class="d-flex gap-2">
+                <a href="{% url 'cadastrar_foto_barbeiro' %}" class="btn btn-delacruz">
+                    <i class="bi bi-camera-fill me-1"></i> Enviar Nova Foto
+                </a>
+                <a href="{% url 'area_barbeiro' %}" class="btn btn-delacruz-outline btn-sm">
+                    <i class="bi bi-arrow-left"></i> Painel
+                </a>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            {% for foto in fotos %}
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card glass-card h-100 overflow-hidden">
+                        <div style="height: 200px; overflow: hidden;">
+                            <img src="{{ foto.imagem.url }}" class="w-100 h-100 object-fit-cover" alt="{{ foto.titulo }}">
+                        </div>
+                        <div class="card-body p-3 d-flex flex-column">
+                            <h5 class="h6 text-white mb-1">{{ foto.titulo }}</h5>
+                            <span class="badge badge-delacruz mb-2 d-inline-block">{{ foto.get_categoria_display }}</span>
+                            <p class="text-secondary small mb-3 flex-grow-1">{{ foto.descricao|truncatewords:10 }}</p>
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-auto border-top border-secondary pt-2">
+                                <span class="text-muted small">
+                                    {% if foto.publicado %}
+                                        <span class="text-success"><i class="bi bi-eye-fill"></i> Visível</span>
+                                    {% else %}
+                                        <span class="text-warning"><i class="bi bi-eye-slash-fill"></i> Privado</span>
+                                    {% endif %}
+                                </span>
+                                <div class="d-flex gap-1">
+                                    <a href="{% url 'editar_foto_barbeiro' foto.id %}" class="btn btn-sm btn-delacruz-outline py-1 px-2 text-success" title="Editar">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a href="{% url 'excluir_foto_barbeiro' foto.id %}" class="btn btn-sm btn-delacruz-outline py-1 px-2 text-danger" title="Excluir">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="text-center text-muted col-12 py-5">
+                    <div class="p-5 rounded glass-card d-inline-block">
+                        <i class="bi bi-images fs-1 d-block mb-3 text-secondary"></i>
+                        <p class="mb-3">Você ainda não enviou nenhuma foto para sua galeria.</p>
+                        <a href="{% url 'cadastrar_foto_barbeiro' %}" class="btn btn-delacruz">Enviar Primeira Foto</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

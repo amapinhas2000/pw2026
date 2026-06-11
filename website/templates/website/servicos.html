@@ -1,0 +1,42 @@
+{% extends "website/modelo.html" %}
+
+{% block titulo_pagina %}Nossos Serviços - Delacruz Barber{% endblock %}
+
+{% block conteudo %}
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold mb-2"><span class="text-gradient">Nossos Serviços</span></h1>
+            <p class="text-secondary">Qualidade e atenção aos detalhes em cada atendimento</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            {% for servico in servicos %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card glass-card h-100 p-4 d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="fs-2 text-success">
+                                <i class="bi bi-{% if servico.icone %}{{ servico.icone }}{% else %}scissors{% endif %}"></i>
+                            </div>
+                            <span class="badge-delacruz">{{ servico.duracao_minutos }} min</span>
+                        </div>
+                        <h3 class="h4 text-white mb-2">{{ servico.nome }}</h3>
+                        <p class="text-secondary small mb-4 flex-grow-1">{{ servico.descricao }}</p>
+                        <div class="mt-auto">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="text-muted small">Valor</span>
+                                <span class="fs-3 fw-bold text-success">R$ {{ servico.preco }}</span>
+                            </div>
+                            <a href="{% url 'agendamento' %}" class="btn btn-delacruz w-100">Agendar Horário</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="text-center text-muted col-12 py-5">
+                    Nenhum serviço disponível no momento.
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

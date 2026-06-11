@@ -1,0 +1,32 @@
+{% extends "website/modelo.html" %}
+{% load crispy_forms_tags %}
+
+{% block titulo_pagina %}{{ titulo }} - Delacruz Barber{% endblock %}
+
+{% block conteudo %}
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card glass-card p-4">
+                    <h1 class="h2 text-white mb-4"><span class="text-gradient">{{ titulo }}</span></h1>
+                    
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        
+                        <div class="auth-actions">
+                            <button type="submit" class="btn btn-delacruz">
+                                {{ botao }}
+                            </button>
+                            <a href="javascript:history.back()" class="btn btn-delacruz-outline">
+                                Voltar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

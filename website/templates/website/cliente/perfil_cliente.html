@@ -1,0 +1,33 @@
+{% extends "website/modelo.html" %}
+{% load crispy_forms_tags %}
+
+{% block titulo_pagina %}Atualizar Perfil - Delacruz Barber{% endblock %}
+
+{% block conteudo %}
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card glass-card p-4">
+                    <h1 class="h2 text-white mb-3"><span class="text-gradient">Meus Dados</span></h1>
+                    <p class="text-secondary small mb-4">Mantenha suas informações de contato atualizadas</p>
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        
+                        <div class="auth-actions">
+                            <button type="submit" class="btn btn-delacruz">
+                                Salvar Alterações
+                            </button>
+                            <a href="{% url 'area_cliente' %}" class="btn btn-delacruz-outline">
+                                Voltar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

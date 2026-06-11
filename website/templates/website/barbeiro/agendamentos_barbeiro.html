@@ -1,0 +1,102 @@
+{% extends "website/modelo.html" %}
+
+{% block titulo_pagina %}Meus Agendamentos - Delacruz Barber{% endblock %}
+
+{% block conteudo %}
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-5">
+            <div>
+                <h1 class="display-5 fw-bold mb-1"><span class="text-gradient">Meus Agendamentos</span></h1>
+                <p class="text-secondary mb-0">Controle e confirme as solicitações dos seus clientes</p>
+            </div>
+            <a href="{% url 'area_barbeiro' %}" class="btn btn-delacruz-outline btn-sm">
+                <i class="bi bi-arrow-left"></i> Voltar ao Painel
+            </a>
+        </div>
+
+        <div class="card glass-card p-4">
+            <div class="table-responsive">
+                <table class="table table-hover table-glass w-100">
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Telefone</th>
+                            <th>Serviço</th>
+                            <th>Data</th>
+                            <th>Horário</th>
+                            <th>Preço</th>
+                            <th>Status</th>
+                            <th>Ações de Confirmação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in agendamentos %}
+                            <tr>
+                                <td class="fw-bold">{{ a.cliente.nome }}</td>
+                                <td class="text-secondary small">{{ a.cliente.telefone }}</td>
+                                <td>{{ a.servico.nome }}</td>
+                                <td>{{ a.data|date:"d/m/Y" }}</td>
+                                <td>{{ a.horario|time:"H:i" }}</td>
+                                <td class="text-success fw-bold">R$ {{ a.servico.preco }}</td>
+                                <td>
+                                    {% if a.status == 'pendente' %}
+                                        <span class="badge bg-warning text-dark">Pendente</span>
+                                    {% elif a.status == 'confirmado' %}
+                                        <span class="badge bg-info text-dark">Confirmado</span>
+                                    {% elif a.status == 'concluido' %}
+                                        <span class="badge bg-success">Concluído</span>
+                                    {% else %}
+                                        <span class="badge bg-danger">Cancelado</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if a.status == 'pendente' %}
+                                        <div class="d-flex gap-2">
+                                            <form method="POST" class="d-inline">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="agendamento_id" value="{{ a.id }}">
+                                                <input type="hidden" name="status" value="confirmado">
+                                                <button type="submit" class="btn btn-sm btn-info text-dark">Confirmar</button>
+                                            </form>
+                                            <form method="POST" class="d-inline">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="agendamento_id" value="{{ a.id }}">
+                                                <input type="hidden" name="status" value="cancelado">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">Recusar</button>
+                                            </form>
+                                        </div>
+                                    {% elif a.status == 'confirmado' %}
+                                        <div class="d-flex gap-2">
+                                            <form method="POST" class="d-inline">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="agendamento_id" value="{{ a.id }}">
+                                                <input type="hidden" name="status" value="concluido">
+                                                <button type="submit" class="btn btn-sm btn-success">Concluir</button>
+                                            </form>
+                                            <form method="POST" class="d-inline">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="agendamento_id" value="{{ a.id }}">
+                                                <input type="hidden" name="status" value="cancelado">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">Cancelar</button>
+                                            </form>
+                                        </div>
+                                    {% else %}
+                                        <span class="text-muted small">-</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="8" class="text-center text-muted py-5">
+                                    Nenhum agendamento ativo encontrado.
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

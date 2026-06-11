@@ -1,6 +1,6 @@
 runtime: python312 
 
-entrypoint: gunicorn -b :$PORT pw2k26.wsgi
+entrypoint: gunicorn -b :$PORT BarberProject.wsgi
 
 handlers:
 
